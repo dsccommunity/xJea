@@ -1,6 +1,6 @@
-{{AppVeyor build status badge for master branch}}
+[![Build status](https://ci.appveyor.com/api/projects/status/4jmq6scy093kf5hi/branch/master?svg=true)](https://ci.appveyor.com/project/PowerShell/xjea/branch/master)
 
-#{{ModuleName}}
+# xJea
 
 {{Description}}
 
