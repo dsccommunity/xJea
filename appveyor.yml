@@ -1,6 +1,7 @@
 #---------------------------------# 
 #      environment configuration  # 
 #---------------------------------# 
+os: WMF 5
 version: 0.3.{build}.0
 install: 
   - cinst -y pester
