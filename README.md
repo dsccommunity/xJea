@@ -18,4 +18,6 @@ Please check out common DSC Resources [contributing guidelines](https://github.c
 
 ### Unreleased
 
+### 0.3.0.0
+
 * Fixing tests
