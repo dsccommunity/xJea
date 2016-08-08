@@ -3,19 +3,19 @@ Import-Module $PSScriptRoot\..\Library\Helper.psm1
 Import-Module $PSScriptRoot\..\Library\JeaDir.psm1
 
 <#
-.Synopsis
-   Creates a random password.
-.DESCRIPTION
-   Creates a random password by generating a array of characters and passing it to Get-Random
-.EXAMPLE
-PS> New-RandomPassword
-g0dIDojsRGcV
-.EXAMPLE
-PS> New-RandomPassword -Length 3
-dyN
-.EXAMPLE
-PS> New-RandomPassword -Length 30 -UseSpecialCharacters
-r5Lhs1K9n*joZl$u^NDO&TkWvPCf2c
+    .Synopsis
+    Creates a random password.
+    .DESCRIPTION
+    Creates a random password by generating a array of characters and passing it to Get-Random
+    .EXAMPLE
+    PS> New-RandomPassword
+    g0dIDojsRGcV
+    .EXAMPLE
+    PS> New-RandomPassword -Length 3
+    dyN
+    .EXAMPLE
+    PS> New-RandomPassword -Length 30 -UseSpecialCharacters
+    r5Lhs1K9n*joZl$u^NDO&TkWvPCf2c
 #>
 function New-RandomPassword
 {
@@ -52,17 +52,18 @@ function New-RandomPassword
 Set-Alias New-RandomString New-RandomPassword
 
 <#
-.Synopsis
-   Create a User Account with a random name
-.DESCRIPTION
+    .Synopsis
+    Create a User Account with a random name
+    .DESCRIPTION
    
-.EXAMPLE
-   Example of how to use this cmdlet
-.EXAMPLE
-   Another example of how to use this cmdlet
+    .EXAMPLE
+    Example of how to use this cmdlet
+    .EXAMPLE
+    Another example of how to use this cmdlet
 #>
 function New-JeaSessionAccount
 {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
     [CmdletBinding(DefaultParameterSetName='UserNamePrefix')]
     Param
     (
@@ -160,6 +161,7 @@ function Test-JeaSessionAccount
 
 function Reset-JeaSessionAccountPassword
 {
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
     [CmdletBinding()]
     Param
     (
@@ -264,10 +266,10 @@ function Assert-ScheduledScripts
 
 function Assert-ScheduledTasks
 {
-param(
-[Parameter()]
-$cred
-)
+  param(
+    [Parameter()]
+    $cred
+  )
 
     $UtilDir = Get-JeaUtilDir
     $wd = "`"$UtilDir`""
