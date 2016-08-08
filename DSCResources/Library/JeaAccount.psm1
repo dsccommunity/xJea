@@ -63,7 +63,7 @@ Set-Alias New-RandomString New-RandomPassword
 #>
 function New-JeaSessionAccount
 {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '')]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
     [CmdletBinding(DefaultParameterSetName='UserNamePrefix')]
     Param
     (
@@ -161,7 +161,7 @@ function Test-JeaSessionAccount
 
 function Reset-JeaSessionAccountPassword
 {
-    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingPlainTextForPassword', '')]
+    [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSAvoidUsingConvertToSecureStringWithPlainText', '')]
     [CmdletBinding()]
     Param
     (
