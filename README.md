@@ -46,6 +46,8 @@ A JEA Toolkit represents a set of tasks (e.g.: auditor tasks, SQL admin tasks…
 ## Versions
 
 ### Unreleased
+* Converted appveyor.yml to install Pester from PSGallery instead of from Chocolatey.
+* Updated appveyor.yml to use the default image.
 
 ### 0.3.0.0
 
