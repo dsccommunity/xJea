@@ -1,4 +1,4 @@
-# Copyright © 2014, Microsoft Corporation. All rights reserved.
+# Copyright Â© 2014, Microsoft Corporation. All rights reserved.
 #InitializeToolKit
 param(
     [ValidateNotNullOrEmpty()]
@@ -61,7 +61,7 @@ function Import-Toolkit
         }
         else
         {
-            Write-host -ForegroundColor "Import-Toolkit [ToolKit]$path NotFound"
+            Write-host -ForegroundColor Yellow "Import-Toolkit [ToolKit]$path NotFound"
         }
     }
 }
