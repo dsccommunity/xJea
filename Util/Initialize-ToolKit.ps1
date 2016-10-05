@@ -5,7 +5,7 @@ param(
     $ToolkitName
 )
 
-ipmo (Join-Path $env:ProgramFiles 'Jea\Util\SafeProxy.psm1') -DisableNameChecking
+import-module (Join-Path $env:ProgramFiles 'Jea\Util\SafeProxy.psm1') -DisableNameChecking
 $winrm = Get-Service WinRM
 
 function Write-ActivityRecord
@@ -14,7 +14,7 @@ function Write-ActivityRecord
     $JeaActivityDir = Join-Path $JeaDir 'Activity'
     $Logfile        = Join-Path $JeaActivityDir 'ActivityLog.csv'
 
-    $WinRMInfo = winrm enum shell |Select-String "ProcessID = $pid" -Context 5,0
+    $WinRMInfo = winrm enum shell | Select-String "ProcessID = $pid" -Context 5,0
     $winRMID   = (($WinRMInfo.Context.PreContext |Select-String 'ShellID = ').Line.trim() -split ' = ')[1]
     $record    = new-Object PSObject -Property @{
         host          = hostname
@@ -112,7 +112,7 @@ function Block-UnauthorizedCommands
     param(
     )
 
-    Get-Command | % {
+    Get-Command | foreach-object {
         $cmd = $_
         if ($approvedCommand.$($cmd.Name) )
         {
@@ -139,7 +139,7 @@ function Enable-CommandLogging
 {
     param($Module)
 
-    Get-Module $Module | % { $_.LogPipelineExecutionDetails = $true }
+    Get-Module $Module | foreach-object { $_.LogPipelineExecutionDetails = $true }
 }
 
 $approvedCommand = @{}
