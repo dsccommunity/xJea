@@ -1,7 +1,7 @@
 # Just Enough Admin
 
 
-For the latest information, please see 
+For the latest information, please see
 [http://blogs.msdn.com/powershell/](http://blogs.msdn.com/powershell/)
 and
 [http://blogs.technet.com/privatecloud/](http://blogs.technet.com/privatecloud/)
@@ -30,7 +30,7 @@ A final case is an operator for a service provider who is responsible for implem
 
 And it goes on and on…
 
-Today, it is common practice in each of these cases, to grant users with excessive administrative privileges in order to perform their job. This results in severe consequences when accounts are breached.  
+Today, it is common practice in each of these cases, to grant users with excessive administrative privileges in order to perform their job. This results in severe consequences when accounts are breached.
 
 
 ## Just Enough Administration
@@ -40,7 +40,7 @@ Just Enough Administration (JEA) is able to overcome many of these challenges th
 
 * Users can only perform tasks that they are authorized to do as part of their role (using PowerShell constrained runspace)
 * Users perform these tasks without being promoted to have administrator privilege on the server
-* The tasks that users are allowed to perform and the user access to the servers are defined and managed from a central configuration server (using Desired State Configuration) 
+* The tasks that users are allowed to perform and the user access to the servers are defined and managed from a central configuration server (using Desired State Configuration)
 * Detailed logging occurs so that access and details of change within an environment are always documented.
 
 
@@ -150,7 +150,7 @@ Start-DscConfiguration -wait -force -verbose -path .\Example
 
 For JEA, PowerShell DSC is used for installation and configuration of JEA Toolkits and Endpoints on a server using the same approach.  Just as we see ‘WindowsFeature Hyper-V’ in the example, we would expect to see ‘JEAEndPoint Hyper-V’ if constructing an endpoint where an operator would performance maintenance on a Hyper-V server.
 
-DSC has two modes – “Push” where an administrator remotely configures servers by specifying the “ComputerName” parameter when executing “Start-DSCConfiguration” from a local machine, and “Pull” where a server is configured to periodically pull its configuration from a central DSC server. Both models enable deployment at scan and can be used for applying JEA Endpoint configuration to servers. 
+DSC has two modes – “Push” where an administrator remotely configures servers by specifying the “ComputerName” parameter when executing “Start-DSCConfiguration” from a local machine, and “Pull” where a server is configured to periodically pull its configuration from a central DSC server. Both models enable deployment at scan and can be used for applying JEA Endpoint configuration to servers.
 
 
 ## Windows PowerShell Constrained Endpoints
@@ -216,7 +216,7 @@ To install JEA manually, first locate the xJEA DSC resource from the Windows Pow
 
 Extract the files from the downloaded archive (.zip) file and copy the folder in to the following location:
 
-	C:\Program Files\WindowsPowerShell\Modules
+    C:\Program Files\WindowsPowerShell\Modules
 
 The xJEA folder should appear in the root of the Modules directory. The contents of the xJEA folder should include an xJea.psd1 file and a folder named DSCResources.
 
@@ -240,9 +240,9 @@ When installing xJEA on an endpoint server using an automated method such as Win
 ```powershell
 Invoke-WebRequest -Uri "http://nuget.org/nuget.exe" -OutFile "$env:TEMP\NuGet.exe"
 &"$env:TEMP\NuGet.exe" install xJea -NoCache `
-	-Source ‘http://go.microsoft.com/fwlink/? LinkID=397631&clcid=0x409’ `
-	-ExcludeVersion -PackageSaveMode "nuspec" `
-	-OutputDirectory "$env:ProgramFiles\WindowsPowerShell\Modules"
+    -Source ‘http://go.microsoft.com/fwlink/? LinkID=397631&clcid=0x409’ `
+    -ExcludeVersion -PackageSaveMode "nuspec" `
+    -OutputDirectory "$env:ProgramFiles\WindowsPowerShell\Modules"
 ```
 
 ### Utilizing Windows a PowerShell DSC Pull Server
@@ -253,7 +253,7 @@ More information about configuration of a DSC Pull Server is available at the Po
 
 To support delivery of the JEA resource, download the xJEA DSC resource and copy it in to the appropriate folder on the Pull Server:
 
-	'C:\ProgramData\PSDSCPullServer\Modules' 
+    'C:\ProgramData\PSDSCPullServer\Modules'
 
 Full details about how to configure the DSC server are available in the blog post linked above.
 
@@ -312,7 +312,7 @@ To create a new JEA EndPoint – create a new JEAEndPoint configuration in the D
       Ensure    = 'Present'
       Toolkit = ‘AuditorToolkit’
       DependsOn = '[JeaToolkit]AuditorToolkit'
-  } 
+  }
 ```
 
 It is also possible to define an endpoint which has multiple toolkits available.
@@ -324,7 +324,7 @@ JeaEndPoint AuditorEndPoint
   Ensure    = 'Present'
   Toolkit = ‘AuditorToolkit’,’Auditor2Toolkit’,’Auditor3Toolkit’
   DependsOn = '[JeaToolkit]AuditorToolkit', '[JeaToolkit]Auditor2Toolkit', '[JeaToolkit]Auditor3Toolkit'
-} 
+}
 ```
 
 To create additional endpoints in the same configuration, repeat this section using a different name for each.
@@ -361,9 +361,9 @@ restart-service,name,,^A
 
 Demo2 -OutputPath C:\DSCDemo
 
-Start-DscConfiguration -Path C:\DSCDemo -ComputerName localhost -Verbose -wait 
+Start-DscConfiguration -Path C:\DSCDemo -ComputerName localhost -Verbose -wait
 
-```	
+```
 
 
 # How-To: Create a Custom Proxy Function
@@ -375,14 +375,14 @@ In this example, the following text would be saved as a .psm1 file and copied to
 ```powershell
 function Get-LogFile {
   Get-Content -Path C:\Log0001.txt  | Select -first 100
-  } 
+  }
 ```
 
 Next in the toolkit CSV file, make the following entry to make the command visible.
 
 
 | Module | Name | Parameter | ValidateSet | ValidatePattern |
-| --- | ---- | ---- |---- | -----| 
+| --- | ---- | ---- |---- | -----|
 |  | Get-LogFile |  |     |      |
 
 
@@ -392,7 +392,7 @@ In circumstances where argument validation or pattern validation is complex, cus
 
 
 # How-To: Access a JEA session
-When a user would like to connect to a JEA endpoint and perform work, the process is the same as connecting to any remote PowerShell session with one difference, they must specify the configuration name.  This would correlate to the name of the JEAEndPoint specified in the DSC configuration script.  
+When a user would like to connect to a JEA endpoint and perform work, the process is the same as connecting to any remote PowerShell session with one difference, they must specify the configuration name.  This would correlate to the name of the JEAEndPoint specified in the DSC configuration script.
 
 The latest details on PowerShell remoting are available in the online documentation.
 [http://technet.microsoft.com/en-us/library/dd347744.aspx](http://technet.microsoft.com/en-us/library/dd347744.aspx)
@@ -403,7 +403,7 @@ In most cases the users will be connecting from their workstation experience and
 Example – Connecting to Remote JEA
 $Session = New-PSSession -ConfigurationName JEAEndPointName -ComputerName Remote_Computer_Name
 
-Enter-PSSession $Session 
+Enter-PSSession $Session
 ```
 
 #Appendix
@@ -425,7 +425,7 @@ Windows PowerShell includes the ability to restrict the elements of the Windows 
 The scripts in the DSC resource xJEA automate the configuration of the PowerShell session and set the LanguageMode property to ‘NoLanguage’.  This is the most restrictive setting available.
 
 For the latest detailed information about Windows PowerShell Language Modes, see the following documentation:
-[http://technet.microsoft.com/en-us/library/dn433292.aspx](http://technet.microsoft.com/en-us/library/dn433292.aspx) 
+[http://technet.microsoft.com/en-us/library/dn433292.aspx](http://technet.microsoft.com/en-us/library/dn433292.aspx)
 
 
 *JEA stands for Jea Session Account*
