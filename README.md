@@ -17,7 +17,7 @@ Please check out common DSC Resources [contributing guidelines](https://github.c
 
 ## Resources
 
-* **xJeaEndPoint** Describes an administration point for users on the Windows Server 
+* **xJeaEndPoint** Describes an administration point for users on the Windows Server
 * **xJeaToolKit** Describes a set of authorized tasks that can be accomplished
 
 ### xJeaEndPoint
@@ -46,17 +46,18 @@ A JEA Toolkit represents a set of tasks (e.g.: auditor tasks, SQL admin tasks…
 ## Versions
 
 ### Unreleased
-* Converted appveyor.yml to install Pester from PSGallery instead of from Chocolatey.
-* Updated appveyor.yml to use the default image.
+
+* Updated appveyor.yml to use the default template.
+* Added unit test template.
 
 ### 0.3.0.0
 
 * Fixing tests
 
 ## Examples
-### Deploy JEA 
+### Deploy JEA
 
-Create a JEA endpoint with the toolkit specification hard coded into the configuration. 
+Create a JEA endpoint with the toolkit specification hard coded into the configuration.
 
 ```
 Configuration JEAAuditors
@@ -80,13 +81,13 @@ Get-Service,,,,
         Ensure    = 'Present'
         Toolkit   = 'AuditorToolkit'
         DependsOn = '[xJeaToolkit]AuditorToolkit'
-    } 
+    }
 }
 ```
 
 ### Deploy JEA from external CSV
 
-In this example the toolkit is provided to the resource from an external CSV file. This can be helpful as the number of toolkits grow to centrally mange them.  
+In this example the toolkit is provided to the resource from an external CSV file. This can be helpful as the number of toolkits grow to centrally mange them.
 
 ```
 Configuration JEAAuditors
@@ -104,15 +105,15 @@ Configuration JEAAuditors
     {
         Name      = 'Auditor EndPoint'
         Ensure    = 'Present'
-        Toolkit   = 'AuditorToolkit' 
+        Toolkit   = 'AuditorToolkit'
         DependsOn = '[xJeaToolkit]AuditorToolkit'
         SecurityDescriptorSddl = 'O:NSG:BAD:P(A;;GX;;;WD)S:P(AU;FA;GA;;;WD)(AU;SA;GXGW;;;WD)'
-    } 
+    }
 }
 ```
 ### Deploy JEA multiple toolkits from external CSV's
 
-It is also possible to define an endpoint which has multiple toolkits available. This example is an extension of the previous in that it simply adds a second toolkit from a different csv to the configuration.  
+It is also possible to define an endpoint which has multiple toolkits available. This example is an extension of the previous in that it simply adds a second toolkit from a different csv to the configuration.
 
 ```
 Configuration JEAAuditors
@@ -124,10 +125,10 @@ Configuration JEAAuditors
         Name         = "Auditor toolkit"
         CommandSpecs = Get-Content “C:\AuditorToolkit\Toolkit.csv” -Raw
         applications = "ipconfig"
-	    Ensure       = 'Present'
+        Ensure       = 'Present'
     }
 
-	xJeaToolkit Auditor2Toolkit
+    xJeaToolkit Auditor2Toolkit
     {
         Name         = "Auditor 2 toolkit"
         CommandSpecs = Get-Content “C:\AuditorToolkit\Toolkit2.csv” -Raw
@@ -141,6 +142,6 @@ Configuration JEAAuditors
         Toolkit   = 'AuditorToolkit','Auditor2Toolkit'
         DependsOn = '[xJeaToolkit]AuditorToolkit','[xJeaToolkit]Auditor2Toolkit'
         SecurityDescriptorSddl = 'O:NSG:BAD:P(A;;GX;;;WD)S:P(AU;FA;GA;;;WD)(AU;SA;GXGW;;;WD)'
-    } 
+    }
 }
 ```
