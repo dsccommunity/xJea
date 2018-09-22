@@ -50,6 +50,8 @@ A JEA Toolkit represents a set of tasks (e.g.: auditor tasks, SQL admin tasks…
 * Updated appveyor.yml to use the default template.
 * Added unit test template.
 * Activate the GitHub App Stale on the GitHub repository
+* Added default template files .codecov.yml, .gitattributes, and .gitignore, and
+  .vscode folder.
 
 ### 0.3.0.0
 
